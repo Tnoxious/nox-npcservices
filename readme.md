@@ -1,3 +1,21 @@
+![npctnox](https://github.com/Tnoxious/nox-busjobs/assets/167952403/de903497-a1b7-440a-b768-ee125930cad1)
+# Fixes done by Tnoxious
+* Lag spike issue
+* NPC tracking
+* NPC call out not ending in time
+* Zone issues fixed
+* Code optimization
+* Made logo image for project
+
+# Tnoxious Youtube Channel
+- [Subscribe](https://www.youtube.com/@Tnoxious)
+  
+
+#
+
+
+# Original notes from MaDHouSe
+ 
 <p align="center">
     <img width="140" src="https://icons.iconarchive.com/icons/iconarchive/red-orb-alphabet/128/Letter-M-icon.png" />  
     <h1 align="center">Hi 👋, I'm MaDHouSe</h1>

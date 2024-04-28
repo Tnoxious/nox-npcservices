@@ -1,13 +1,14 @@
---[[ ===================================================== ]]--
---[[           MH NPC Services Script by MaDHouSe          ]]--
---[[ ===================================================== ]]--
+--[[ ===================================================== ]] --
+--[[           MH NPC Services Script by MaDHouSe          ]] --
+--[[                   & BY Tnoxious                       ]] --
+--[[ ===================================================== ]] --
 
 fx_version 'cerulean'
 game 'gta5'
 
 description 'MH - NPC Services - a 6 in 1 npc services. NPC (Police/Ambulance/Mechanic/TowTruck/Taxi/Limo)'
-author 'MaDHouSe'
-version '1.0'
+author 'MaDHouSe & Tnoxious'
+version '1.2.0'
 
 shared_scripts {
     '@qb-core/shared/locale.lua',
@@ -22,7 +23,6 @@ client_scripts {
 server_scripts {
     '@oxmysql/lib/MySQL.lua',
     'server/main.lua',
-    'server/update.lua',
 }
 
 dependencies {

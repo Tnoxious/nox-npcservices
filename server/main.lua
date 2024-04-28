@@ -138,7 +138,7 @@ RegisterServerEvent(
                     TriggerClientEvent(
                         "QBCore:Notify",
                         num,
-                        Lang:t("notify.can_not_use_services_on_your_seld"),
+                        Lang:t("notify.can_not_use_services"),
                         "error",
                         10000
                     )

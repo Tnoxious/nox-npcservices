@@ -117,7 +117,7 @@ local function SetCompanyData(job)
         name = Config.Service[job].name,
         job = Config.Service[job].job,
         ped = Config.JobPeds[job].models[math.random(1, #Config.JobPeds[job].models)],
-        plate = Config.Service[job].plate,
+        plate = Config.Service[job].plate..math.random(1000, 9999),
         home = Config.Service[job].home,
         color = Config.Service[job].color,
         checkin = Config.Service[job].checkin,
@@ -386,6 +386,7 @@ local function HelpOnLocation()
         function(isPaid)
             if isPaid then
                 if company.job == "ambulance" then
+		    ClearPedTasksImmediately(PlayerPedId()) --a fix for emotes blocking npc action
                     local dictionary = "mini@cpr@char_a@cpr_str"
                     local animation = "cpr_pumpchest"
                     loadAnimDict(dictionary)
@@ -418,6 +419,7 @@ local function HelpOnLocation()
 					
                         ClearPedTasks(company.driver)
                         if company.job == "ambulance" then
+			    ClearPedTasksImmediately(PlayerPedId()) --a fix for emotes blocking npc action
                             ClearPedTasks(company.codriver)
                             TaskWarpPedIntoVehicle(company.codriver, company.vehicle, 0)
                             TriggerEvent("hospital:client:Revive")
@@ -727,11 +729,16 @@ RegisterNetEvent(
             return
         end
         if #company == 0 and not company.isCalled then
-            CallAnimation(callData.job)
+            if
+                QBCore.Functions.GetPlayerData().metadata["isdead"] or
+                    QBCore.Functions.GetPlayerData().metadata["inlaststand"]
+             then --skips using phone to call just calls if dying
+            else
+                CallAnimation(callData.job)
+            end
             SetCompanyData(callData.job)
             company.isCalled = true
             company.price = callData.price
-
             if callData.job == "mechanic" then
                 local playerPed = PlayerPedId()
                 local vehicle = GetVehiclePedIsIn(playerPed, false)
@@ -1261,7 +1268,13 @@ CreateThread(
                             call_data.targetId = GetPlayerServerId(PlayerId())
                             call_data.price = Config.Service["ambulance"].price
                             Wait(Config.AutoCallTimer)
-                            CallAnimation(call_data.job)
+                            if
+                                QBCore.Functions.GetPlayerData().metadata["isdead"] or
+                                    QBCore.Functions.GetPlayerData().metadata["inlaststand"]
+                             then --skips using phone to call just calls if dying
+                            else
+                                CallAnimation(call_data.job)
+                            end
                             TriggerServerEvent("mh-npcservices:server:sendService", call_data)
                         end
                     end
@@ -1272,6 +1285,7 @@ CreateThread(
         end
     end
 )
+
 
 CreateThread(
     function()
